@@ -28,7 +28,7 @@ class Deck():
     def shuffle(self):
         shuffle(self.cards)
     
-    def get_card(self, num: int) -> int:
+    def get_card(self, num: int) -> str:
         card = self.cards[num//self.step]
         self.cards.remove(card)
         self.range -= self.step
