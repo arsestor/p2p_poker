@@ -1,10 +1,5 @@
 from random import randint, choice, shuffle
 
-def check_players(a, b):
-    if b.accept_num(a.player_num) == a.accept_num(b.player_num):
-        return [True, a.accept_num(b.player_num)]
-    else:
-        return [False, a.accept_num(b.player_num), b.accept_num(a.player_num)]
 
 class Player():
     def __init__(self):
@@ -13,6 +8,7 @@ class Player():
     def accept_num(self, other_num):
         return self.player_num * other_num
     
+
 class Deck():
     def __init__(self):
         self.cards = ['2♠', '2♣', '2♥', '2♦', '3♠', '3♣', '3♥', '3♦',
@@ -34,6 +30,7 @@ class Deck():
         self.range -= self.step
         return card
 
+
 class Game():
     def __init__(self, players: list):
         self.players = {i:players[i] for i in range(len(players))}
@@ -44,14 +41,17 @@ class Game():
             for player2 in self.players:
                 if player1 != player2:
                     result.append(self.players[player1].accept_num(self.players[player2].player_num))
-        print(result)
-        
+        result = sorted(result)
+        for i in range(len(result[1::2])):
+            if result[i*2] != result[i*2+1]:
+                return False
+        return True
+
 
 a = Player()
 b = Player()
 c = Player()
-if ch_p[0] == True:
-    game = Game([a, b, c])
-    game.check_players()
-else:
-    print('Игроки не прошли проверку')
+
+game = Game([a, b, c])
+if game.check_players() == True:
+    print(True)
