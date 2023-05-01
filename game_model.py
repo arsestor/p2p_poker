@@ -1,4 +1,4 @@
-from random import randbytes, randint, choice, shuffle
+from random import randint, choice, shuffle
 
 def check_players(a, b):
     if b.accept_num(a.player_num) == a.accept_num(b.player_num):
@@ -34,15 +34,24 @@ class Deck():
         self.range -= self.step
         return card
 
-# ♠ ♣ ♥ ♦
+class Game():
+    def __init__(self, players: list):
+        self.players = {i:players[i] for i in range(len(players))}
+    
+    def check_players(self):
+        result = []
+        for player1 in range(len(self.players)):
+            for player2 in self.players:
+                if player1 != player2:
+                    result.append(self.players[player1].accept_num(self.players[player2].player_num))
+        print(result)
+        
 
 a = Player()
 b = Player()
-ch_p = check_players(a, b)
+c = Player()
 if ch_p[0] == True:
-    number = ch_p[1]
-    deck = Deck()
-    deck.shuffle()
-    print(deck.get_card(number))
+    game = Game([a, b, c])
+    game.check_players()
 else:
     print('Игроки не прошли проверку')
