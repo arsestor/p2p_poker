@@ -3,11 +3,11 @@ from random import randint, choice, shuffle
 
 class Player():
     def __init__(self):
-        self.player_num = choice(range(1, 101))
+        self.player_num = random.choice(range(1, 101))
 
     def accept_num(self, other_num):
         return self.player_num * other_num
-    
+
 
 class Deck():
     def __init__(self):
